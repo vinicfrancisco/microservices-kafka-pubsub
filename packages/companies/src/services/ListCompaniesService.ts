@@ -1,6 +1,6 @@
 import { inject, injectable } from 'tsyringe';
 
-import Company from '../infra/http/entities/ICompany';
+import Company from '../entities/ICompany';
 import ICompaniesRepository from '../repositories/ICompaniesRepository';
 
 @injectable()
