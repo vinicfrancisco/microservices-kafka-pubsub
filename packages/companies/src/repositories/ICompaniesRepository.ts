@@ -1,6 +1,6 @@
-import Company from '../entities/ICompany';
-import ICreateCompanyDTO from '../dtos/ICreateCompanyDTO';
-import IUpdateUserDTO from '../dtos/IUpdateUserDTO';
+import Company from '../infra/http/entities/ICompany';
+import ICreateCompanyDTO from '../infra/http/dtos/ICreateCompanyDTO';
+import IUpdateUserDTO from '../infra/http/dtos/IUpdateUserDTO';
 
 export default interface ICompaniesRepository {
   index(): Promise<Company[]>;

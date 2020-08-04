@@ -1,9 +1,9 @@
 import { uuid } from 'uuidv4';
 
-import Company from '../entities/ICompany';
+import Company from '../infra/http/entities/ICompany';
 import ICompaniesRepository from './ICompaniesRepository';
-import ICreateCompanyDTO from '../dtos/ICreateCompanyDTO';
-import IUpdateUserDTO from '../dtos/IUpdateUserDTO';
+import ICreateCompanyDTO from '../infra/http/dtos/ICreateCompanyDTO';
+import IUpdateUserDTO from '../infra/http/dtos/IUpdateUserDTO';
 
 class CompaniesRepository implements ICompaniesRepository {
   private companies: Company[] = [];
