@@ -4,11 +4,13 @@
   "main": "index.js",
   "license": "MIT",
   "scripts": {
-    "dev": "ts-node-dev --debug false --ignore-watch node_modules src/index.ts"
+    "dev": "ts-node-dev --debug false --ignore-watch node_modules src/shared/server.ts"
   },
   "dependencies": {
     "express": "^4.17.1",
     "kafkajs": "^1.12.0",
+    "reflect-metadata": "^0.1.13",
+    "tsyringe": "^4.3.0",
     "uuidv4": "^6.2.1"
   },
   "devDependencies": {
