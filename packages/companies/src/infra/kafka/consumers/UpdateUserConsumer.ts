@@ -4,12 +4,10 @@ import kafka from '../client';
 import UpdateCompanyUserService from '../../../services/UpdateCompanyUserService';
 
 interface IMessage {
-  user: {
-    id: string;
-    name: string;
-    email: string;
-    password: string;
-  };
+  id: string;
+  name: string;
+  email: string;
+  password: string;
 }
 
 export default class UpdateUserConsumer {
@@ -30,16 +28,14 @@ export default class UpdateUserConsumer {
 
     await consumer.run({
       async eachMessage({ message }) {
-        const data: IMessage = JSON.parse(message.value.toString());
+        const user: IMessage = JSON.parse(message.value.toString());
 
         const updateCompanyUser = container.resolve(UpdateCompanyUserService);
 
-        const company = await updateCompanyUser.execute({
-          user_id: data.user.id,
-          user_name: data.user.name,
+        await updateCompanyUser.execute({
+          user_id: user.id,
+          user_name: user.name,
         });
-
-        console.log(`DEU CERTO: `, company);
       },
     });
 

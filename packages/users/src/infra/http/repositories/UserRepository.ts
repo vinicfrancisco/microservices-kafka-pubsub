@@ -30,12 +30,12 @@ class UserRepository implements IUserRepository {
   }
 
   public async update({
-    user_id,
+    id,
     name,
     email,
     password,
   }: IUpdateUserDTO): Promise<User> {
-    const findIndex = this.users.findIndex(findUser => findUser.id === user_id);
+    const findIndex = this.users.findIndex(findUser => findUser.id === id);
 
     this.users[findIndex] = {
       ...this.users[findIndex],

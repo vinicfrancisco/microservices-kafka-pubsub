@@ -29,7 +29,7 @@ export default class UsersController {
     const { name, email, password } = request.body;
 
     const user = await usersRepository.update({
-      user_id: id,
+      id,
       name,
       email,
       password,
