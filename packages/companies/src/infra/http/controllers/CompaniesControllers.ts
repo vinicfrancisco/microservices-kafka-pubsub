@@ -1,19 +1,16 @@
-import { inject, injectable } from 'tsyringe';
 import { Request, Response } from 'express';
+import { container } from 'tsyringe';
 
-import ICompaniesRepository from '../../../shared/repositories/ICompaniesRepository';
+import CreateCompanyService from '../../../services/CreateCompanyService';
+import ListCompaniesService from '../../../services/ListCompaniesService';
 
-@injectable()
 export default class CompaniesController {
-  constructor(
-    @inject('CompaniesRepository')
-    private companiesRepository: ICompaniesRepository,
-  ) {}
-
   public async store(request: Request, response: Response): Promise<Response> {
     const { name, user_id, user_name } = request.body;
 
-    const company = await this.companiesRepository.create({
+    const createCompany = container.resolve(CreateCompanyService);
+
+    const company = await createCompany.execute({
       name,
       user_id,
       user_name,
@@ -23,7 +20,9 @@ export default class CompaniesController {
   }
 
   public async index(request: Request, response: Response): Promise<Response> {
-    const companies = await this.companiesRepository.index();
+    const listCompanies = container.resolve(ListCompaniesService);
+
+    const companies = await listCompanies.execute();
 
     return response.send(companies);
   }
