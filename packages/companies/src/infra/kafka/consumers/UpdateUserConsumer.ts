@@ -1,4 +1,7 @@
+import { container } from 'tsyringe';
 import kafka from '../client';
+
+import UpdateCompanyUserService from '../../../services/UpdateCompanyUserService';
 
 interface IMessage {
   user: {
@@ -27,8 +30,16 @@ export default class UpdateUserConsumer {
 
     await consumer.run({
       async eachMessage({ message }) {
-        // const data: IMessage = JSON.parse(message.value.toString());
-        // Update company user;
+        const data: IMessage = JSON.parse(message.value.toString());
+
+        const updateCompanyUser = container.resolve(UpdateCompanyUserService);
+
+        const company = await updateCompanyUser.execute({
+          user_id: data.user.id,
+          user_name: data.user.name,
+        });
+
+        console.log(`DEU CERTO: `, company);
       },
     });
 
