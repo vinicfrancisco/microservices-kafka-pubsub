@@ -1,9 +1,8 @@
-import { container } from 'tsyringe';
 import { Router } from 'express';
 
 import CompaniesController from './controllers/CompaniesControllers';
 
-const companiesController = container.resolve(CompaniesController);
+const companiesController = new CompaniesController();
 
 const routes = Router();
 
