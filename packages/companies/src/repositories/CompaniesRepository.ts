@@ -30,12 +30,11 @@ class CompaniesRepository implements ICompaniesRepository {
   }
 
   public async updateUser({
-    company_id,
     user_id,
     user_name,
   }: IUpdateUserDTO): Promise<Company> {
     const findIndex = this.companies.findIndex(
-      findCompany => findCompany.id === company_id,
+      findCompany => findCompany.user_id === user_id,
     );
 
     this.companies[findIndex] = {
