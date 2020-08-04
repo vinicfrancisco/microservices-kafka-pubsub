@@ -1,0 +1,17 @@
+{
+  "name": "microservices",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "private": true,
+  "workspaces": {
+    "packages": [
+      "packages/*"
+    ]
+  },
+  "devDependencies": {
+    "ts-node-dev": "^1.0.0-pre.56",
+    "typescript": "^3.9.7",
+    "@microservices/eslint": "*"
+  }
+}
