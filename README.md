@@ -7,12 +7,18 @@ using REST, Kafka and Google Cloud Pub/Sub
 
 This project uses monorepo structure, to install the dependences just run the following command:
 
-` yarn `
+```
+    yarn
+```
 
 ## Running Microservices
 
 There are 2 microservices on this project. Run the following commands on the root of the project
 
-` cd packages/companies && yarn dev `
+```
+    cd packages/companies && yarn dev
+```
 
-` cd packages/users && yarn dev `
+```
+    cd packages/users && yarn dev
+```
