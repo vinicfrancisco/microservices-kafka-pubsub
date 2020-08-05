@@ -3,8 +3,8 @@ import { inject, injectable } from 'tsyringe';
 import User from '../entities/IUser';
 import IUsersRepository from '../repositories/IUsersRepository';
 
-// import kafkaClient from '../infra/kafka/client';
-import pubSubClient from '../infra/pubsub/client';
+import kafkaClient from '../infra/kafka/client';
+// import pubSubClient from '../infra/pubsub/client';
 
 interface IRequest {
   id: string;
@@ -31,19 +31,19 @@ class UpdateUserService {
     /**
      * Kafka Message
      */
-    // await kafkaClient.producer().send({
-    //   topic: 'companies.update-user',
-    //   messages: [{ value: JSON.stringify(user) }],
-    // });
+    await kafkaClient.producer().send({
+      topic: 'companies.update-user',
+      messages: [{ value: JSON.stringify(user) }],
+    });
 
     /**
      * Pub/Sub Message
      */
-    const dataBuffer = Buffer.from(JSON.stringify(user));
+    // const dataBuffer = Buffer.from(JSON.stringify(user));
 
-    await pubSubClient.topic('update-user').publish(dataBuffer, {
-      origin: 'users',
-    });
+    // await pubSubClient.topic('update-user').publish(dataBuffer, {
+    //   origin: 'users',
+    // });
 
     return user;
   }
