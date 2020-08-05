@@ -39,6 +39,6 @@ export default class UpdateUserConsumer {
       },
     });
 
-    console.log('Listening to messages!');
+    console.log('Listening to kafka messages!');
   }
 }
