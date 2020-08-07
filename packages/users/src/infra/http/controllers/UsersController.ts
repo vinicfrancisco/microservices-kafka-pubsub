@@ -16,11 +16,12 @@ export default class UsersController {
   }
 
   public async store(request: Request, response: Response): Promise<Response> {
-    const { first_name, last_name, email } = request.body;
+    const { id, first_name, last_name, email } = request.body;
 
     const createUser = container.resolve(CreateUserService);
 
     const user = await createUser.execute({
+      id,
       first_name,
       last_name,
       email,
