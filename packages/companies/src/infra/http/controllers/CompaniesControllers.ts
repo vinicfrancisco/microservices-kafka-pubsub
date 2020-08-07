@@ -12,7 +12,7 @@ export default class CompaniesController {
 
     const company = await createCompany.execute({
       name,
-      user_id,
+      user_id: Number(user_id),
       user_name,
     });
 

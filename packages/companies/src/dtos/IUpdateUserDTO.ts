@@ -1,4 +1,4 @@
 export default interface IUpdateUserDTO {
-  user_id: string;
+  user_id: number;
   user_name: string;
 }

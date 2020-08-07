@@ -1,10 +1,10 @@
 import { inject, injectable } from 'tsyringe';
 
-import Company from '../entities/ICompany';
+import { ICompany } from '../models/Company';
 import ICompaniesRepository from '../repositories/ICompaniesRepository';
 
 interface IRequest {
-  user_id: string;
+  user_id: number;
   user_name: string;
 }
 
@@ -15,7 +15,7 @@ class UpdateCompanyUser {
     private companiesRepository: ICompaniesRepository,
   ) {}
 
-  public async execute({ user_id, user_name }: IRequest): Promise<Company> {
+  public async execute({ user_id, user_name }: IRequest): Promise<ICompany> {
     const company = this.companiesRepository.updateUser({
       user_id,
       user_name,

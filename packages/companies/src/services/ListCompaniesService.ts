@@ -1,6 +1,6 @@
 import { inject, injectable } from 'tsyringe';
 
-import Company from '../entities/ICompany';
+import { ICompany } from '../models/Company';
 import ICompaniesRepository from '../repositories/ICompaniesRepository';
 
 @injectable()
@@ -10,7 +10,7 @@ class ListCompaniesService {
     private companiesRepository: ICompaniesRepository,
   ) {}
 
-  public async execute(): Promise<Company[]> {
+  public async execute(): Promise<ICompany[]> {
     const companies = this.companiesRepository.index();
 
     return companies;

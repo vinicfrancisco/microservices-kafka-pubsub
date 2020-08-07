@@ -4,10 +4,10 @@ import pubSubClient from '../client';
 import UpdateCompanyUserService from '../../../services/UpdateCompanyUserService';
 
 interface IUser {
-  id: string;
-  name: string;
+  _id: number;
+  first_name: string;
+  last_name: string;
   email: string;
-  password: string;
 }
 
 interface IMessage {
@@ -29,8 +29,8 @@ export default class UpdateUserConsumer {
       const updateCompanyUser = container.resolve(UpdateCompanyUserService);
 
       await updateCompanyUser.execute({
-        user_id: user.id,
-        user_name: user.name,
+        user_id: Number(user._id),
+        user_name: `${user.first_name} ${user.last_name}`,
       });
 
       message.ack();
