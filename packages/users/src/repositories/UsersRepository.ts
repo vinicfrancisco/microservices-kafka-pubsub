@@ -2,6 +2,7 @@ import User, { IUser } from '../models/User';
 import IUserRepository from './IUsersRepository';
 import ICreateUserDTO from '../dtos/ICreateUserDTO';
 import IUpdateUserDTO from '../dtos/IUpdateUserDTO';
+import IDeleteUserDTO from '../dtos/IDeleteUserDTO';
 
 class UserRepository implements IUserRepository {
   public async index(): Promise<IUser[]> {
@@ -44,6 +45,10 @@ class UserRepository implements IUserRepository {
     });
 
     return user;
+  }
+
+  public async delete({ id }: IDeleteUserDTO): Promise<void> {
+    await User.findByIdAndDelete(id);
   }
 }
 
