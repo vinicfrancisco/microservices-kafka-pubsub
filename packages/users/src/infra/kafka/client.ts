@@ -1,7 +1,7 @@
 import { Kafka, logLevel } from 'kafkajs';
 
 const kafka = new Kafka({
-  brokers: ['localhost:9092'],
+  brokers: ['192.168.0.231:9092'],
   logLevel: logLevel.WARN,
   clientId: 'users',
 });
