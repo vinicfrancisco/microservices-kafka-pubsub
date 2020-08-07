@@ -1,12 +1,12 @@
 import { inject, injectable } from 'tsyringe';
 
-import User from '../entities/IUser';
+import { IUser } from '../models/User';
 import IUsersRepository from '../repositories/IUsersRepository';
 
 interface IRequest {
-  name: string;
+  first_name: string;
+  last_name: string;
   email: string;
-  password: string;
 }
 
 @injectable()
@@ -16,11 +16,15 @@ class CreateUserService {
     private usersRepository: IUsersRepository,
   ) {}
 
-  public async execute({ name, email, password }: IRequest): Promise<User> {
+  public async execute({
+    first_name,
+    last_name,
+    email,
+  }: IRequest): Promise<IUser> {
     const user = this.usersRepository.create({
-      name,
+      first_name,
+      last_name,
       email,
-      password,
     });
 
     return user;

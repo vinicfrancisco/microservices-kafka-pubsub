@@ -1,6 +1,6 @@
 import { inject, injectable } from 'tsyringe';
 
-import User from '../entities/IUser';
+import { IUser } from '../models/User';
 import IUsersRepository from '../repositories/IUsersRepository';
 
 @injectable()
@@ -10,7 +10,7 @@ class ListUsersService {
     private usersRepository: IUsersRepository,
   ) {}
 
-  public async execute(): Promise<User[]> {
+  public async execute(): Promise<IUser[]> {
     const companies = this.usersRepository.index();
 
     return companies;

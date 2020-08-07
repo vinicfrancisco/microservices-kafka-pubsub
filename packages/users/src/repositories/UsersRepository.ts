@@ -1,50 +1,49 @@
-import { uuid } from 'uuidv4';
-
-import User from '../entities/IUser';
+import User, { IUser } from '../models/User';
 import IUserRepository from './IUsersRepository';
 import ICreateUserDTO from '../dtos/ICreateUserDTO';
 import IUpdateUserDTO from '../dtos/IUpdateUserDTO';
 
 class UserRepository implements IUserRepository {
-  private users: User[] = [];
+  public async index(): Promise<IUser[]> {
+    const users = await User.find();
 
-  public async index(): Promise<User[]> {
-    return this.users;
+    return users;
   }
 
   public async create({
-    name,
+    first_name,
+    last_name,
     email,
-    password,
-  }: ICreateUserDTO): Promise<User> {
-    const user = {
-      id: uuid(),
-      name,
+  }: ICreateUserDTO): Promise<IUser> {
+    const user = await User.create({
+      _id: Math.round(Math.random() * 1000),
+      first_name,
+      last_name,
       email,
-      password,
-    };
-
-    this.users.push(user);
+    });
 
     return user;
   }
 
   public async update({
     id,
-    name,
+    first_name,
+    last_name,
     email,
-    password,
-  }: IUpdateUserDTO): Promise<User> {
-    const findIndex = this.users.findIndex(findUser => findUser.id === id);
+  }: IUpdateUserDTO): Promise<IUser> {
+    const user = await User.findById(id);
 
-    this.users[findIndex] = {
-      ...this.users[findIndex],
-      name,
+    if (!user) {
+      throw new Error('UserNotFound');
+    }
+
+    await user.update({
+      first_name,
+      last_name,
       email,
-      password,
-    };
+    });
 
-    return this.users[findIndex];
+    return user;
   }
 }
 
