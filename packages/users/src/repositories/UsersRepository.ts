@@ -12,12 +12,13 @@ class UserRepository implements IUserRepository {
   }
 
   public async create({
+    id,
     first_name,
     last_name,
     email,
   }: ICreateUserDTO): Promise<IUser> {
     const user = await User.create({
-      _id: Math.round(Math.random() * 1000),
+      _id: id || Math.round(Math.random() * 1000),
       first_name,
       last_name,
       email,
@@ -32,17 +33,21 @@ class UserRepository implements IUserRepository {
     last_name,
     email,
   }: IUpdateUserDTO): Promise<IUser> {
-    const user = await User.findById(id);
+    const user = await User.findOneAndUpdate(
+      { _id: id },
+      {
+        first_name,
+        last_name,
+        email,
+      },
+      { new: true },
+    );
 
     if (!user) {
       throw new Error('UserNotFound');
     }
 
-    await user.update({
-      first_name,
-      last_name,
-      email,
-    });
+    await user.save();
 
     return user;
   }

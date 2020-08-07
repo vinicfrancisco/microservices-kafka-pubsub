@@ -1,5 +1,9 @@
-// import { container } from 'tsyringe';
+import { container } from 'tsyringe';
 import kafka from '../client';
+
+import CreateUserService from '../../../services/CreateUserService';
+import UpdateUserService from '../../../services/UpdateUserService';
+import DeleteUserService from '../../../services/DeleteUserService';
 
 export default class UsersConsumers {
   constructor() {
@@ -18,7 +22,49 @@ export default class UsersConsumers {
 
     await consumer.run({
       async eachMessage({ message }) {
-        console.log(JSON.parse(message.value.toString()));
+        if (message.value !== null) {
+          const { payload } = JSON.parse(message.value.toString());
+
+          if (!payload.before && payload.after) {
+            console.log('ADICIONOU');
+
+            const createUserService = container.resolve(CreateUserService);
+
+            const { id, email, first_name, last_name } = payload.after;
+
+            await createUserService.execute({
+              id,
+              email,
+              first_name,
+              last_name,
+            });
+          }
+
+          if (payload.before && !payload.after) {
+            console.log('REMOVEU');
+
+            const deleteUserService = container.resolve(DeleteUserService);
+
+            await deleteUserService.execute({
+              id: payload.before.id,
+            });
+          }
+
+          if (payload.before && payload.after) {
+            console.log('EDITOU');
+
+            const updateUserService = container.resolve(UpdateUserService);
+
+            const { id, email, first_name, last_name } = payload.after;
+
+            await updateUserService.execute({
+              id,
+              email,
+              first_name,
+              last_name,
+            });
+          }
+        }
       },
     });
 

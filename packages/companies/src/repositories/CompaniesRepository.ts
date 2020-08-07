@@ -28,16 +28,18 @@ class CompaniesRepository implements ICompaniesRepository {
   public async updateUser({
     user_id,
     user_name,
-  }: IUpdateUserDTO): Promise<ICompany> {
+  }: IUpdateUserDTO): Promise<ICompany | null> {
     const company = await Company.findOne({ user_id });
 
     if (!company) {
-      throw new Error('CompanyNotFound');
+      return null;
     }
 
     await company.update({
       user_name,
     });
+
+    await company.save();
 
     return company;
   }

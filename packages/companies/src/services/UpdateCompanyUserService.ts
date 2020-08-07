@@ -15,7 +15,10 @@ class UpdateCompanyUser {
     private companiesRepository: ICompaniesRepository,
   ) {}
 
-  public async execute({ user_id, user_name }: IRequest): Promise<ICompany> {
+  public async execute({
+    user_id,
+    user_name,
+  }: IRequest): Promise<ICompany | null> {
     const company = this.companiesRepository.updateUser({
       user_id,
       user_name,

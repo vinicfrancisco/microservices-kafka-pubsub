@@ -5,5 +5,5 @@ import IUpdateUserDTO from '../dtos/IUpdateUserDTO';
 export default interface ICompaniesRepository {
   index(): Promise<ICompany[]>;
   create(data: ICreateCompanyDTO): Promise<ICompany>;
-  updateUser(data: IUpdateUserDTO): Promise<ICompany>;
+  updateUser(data: IUpdateUserDTO): Promise<ICompany | null>;
 }

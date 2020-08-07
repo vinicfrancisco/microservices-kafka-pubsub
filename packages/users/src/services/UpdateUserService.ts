@@ -32,6 +32,8 @@ class UpdateUserService {
       email,
     });
 
+    console.log(user);
+
     const dataBuffer = Buffer.from(JSON.stringify(user));
     await pubSubClient.topic('update-user').publish(dataBuffer, {
       origin: 'users',
