@@ -1,3 +1,3 @@
-import UsersConsumers from './consumers/UsersConsumers';
+import UsersConsumer from './consumers/UsersConsumer';
 
-new UsersConsumers();
+new UsersConsumer();
