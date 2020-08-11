@@ -17,20 +17,21 @@ export default class UsersConsumers {
 
     await consumer.connect();
     await consumer.subscribe({
-      topic: 'dbserver1.inventory.customers',
+      topic: 'server.public.customers',
     });
 
     await consumer.run({
       async eachMessage({ message }) {
         if (message.value !== null) {
           const { payload } = JSON.parse(message.value.toString());
+          const { op, before, after } = payload;
 
-          if (!payload.before && payload.after) {
+          if (op === 'c') {
             console.log('ADICIONOU');
 
             const createUserService = container.resolve(CreateUserService);
 
-            const { id, email, first_name, last_name } = payload.after;
+            const { id, email, first_name, last_name } = after;
 
             await createUserService.execute({
               id,
@@ -40,22 +41,22 @@ export default class UsersConsumers {
             });
           }
 
-          if (payload.before && !payload.after) {
+          if (op === 'd') {
             console.log('REMOVEU');
 
             const deleteUserService = container.resolve(DeleteUserService);
 
             await deleteUserService.execute({
-              id: payload.before.id,
+              id: before.id,
             });
           }
 
-          if (payload.before && payload.after) {
+          if (op === 'u') {
             console.log('EDITOU');
 
             const updateUserService = container.resolve(UpdateUserService);
 
-            const { id, email, first_name, last_name } = payload.after;
+            const { id, email, first_name, last_name } = after;
 
             await updateUserService.execute({
               id,
