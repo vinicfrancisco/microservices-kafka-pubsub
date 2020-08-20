@@ -27,14 +27,6 @@ This project uses monorepo structure, to install the dependences just run the fo
     yarn
 ```
 
-## Kafka
-
-Configure Kafka just running this command on the root of the project:
-
-```
-    docker-compose up
-```
-
 ## Running Microservices
 
 There are 2 microservices on this project. Run the following commands on the root of the project
