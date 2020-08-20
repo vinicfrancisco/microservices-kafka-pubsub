@@ -6,7 +6,7 @@ Kafka communication on this application is to populate MongoDB with updates on a
 
 If you want to run this application and see the communication flux, you need follow this steps to build Debezium and kafka structure [Debezium Tutorial](https://debezium.io/documentation/reference/1.2/tutorial.html)
 
-After that, if you want to see the comunication betwwen the microservices, you need to setup a GCP Pub/Sub project, just follow this tutorial: [Pub/Sub Quick Start](https://cloud.google.com/pubsub/docs/quickstarts).
+After that, if you want to see the comunication between the microservices, you need to setup a GCP Pub/Sub project, just follow this tutorial: [Pub/Sub Quick Start](https://cloud.google.com/pubsub/docs/quickstarts).
 
 ## 🛠 Made With 🛠
 
